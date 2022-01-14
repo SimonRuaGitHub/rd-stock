@@ -1,7 +1,7 @@
 package com.rapid.stock;
 
 import com.rapid.stock.model.Item;
-import com.rapid.stock.model.Product;
+import com.rapid.stock.model.ParentProduct;
 import com.rapid.stock.model.ProductType;
 import com.rapid.stock.model.Subproduct;
 import com.rapid.stock.repository.ProductRepository;
@@ -25,7 +25,7 @@ public class RapidStockApplication {
     @Bean
     public CommandLineRunner runner(ProductRepository repository, MongoTemplate mongoTemplate){
            return args -> {
-                 System.out.println("Inserting Product");
+                 System.out.println("Inserting ParentProduct");
 
                  List<Item> items = Arrays.asList(new Item(1,"Coca Cola", 0),
                                                   new Item(2,"Sprite", 0),
@@ -33,7 +33,7 @@ public class RapidStockApplication {
 
                  List<Subproduct> subproducts = Arrays.asList(new Subproduct(1,"drinks",true, items));
 
-                 Product product = new Product(
+                 ParentProduct parentProduct = new ParentProduct(
                           "2353565",
                           "Rapidogs Big",
                           "Rapidogs clásico con queso, tocineta, papas y gaseosa a elección.",
@@ -49,12 +49,12 @@ public class RapidStockApplication {
                                                  .and("isAvailable").is(true)
                                                  .and("quantityAvailable").gt(29));
 
-               List<Product> products = mongoTemplate.find(query, Product.class);
+               List<ParentProduct> parentProducts = mongoTemplate.find(query, ParentProduct.class);
 
-               System.out.println("products found through query: ");
-               products.forEach(System.out::println);
+               System.out.println("parentProducts found through query: ");
+               parentProducts.forEach(System.out::println);
 
-               repository.insert(product);
+               repository.insert(parentProduct);
            };
     }
 }

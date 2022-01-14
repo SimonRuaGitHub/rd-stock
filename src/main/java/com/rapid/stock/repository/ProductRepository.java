@@ -1,7 +1,7 @@
 package com.rapid.stock.repository;
 
-import com.rapid.stock.model.Product;
+import com.rapid.stock.model.ParentProduct;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface ProductRepository extends MongoRepository<Product,String> {
+public interface ProductRepository extends MongoRepository<ParentProduct,String> {
 }

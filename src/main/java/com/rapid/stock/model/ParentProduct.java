@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Document
-public class Product {
+public class ParentProduct {
 
     @Id
     private String id;
@@ -24,7 +24,7 @@ public class Product {
     private LocalDateTime createdAt;
     private List<Subproduct> subProducts;
 
-    public Product(String productId, String productName, String productDescription, Double price, Integer quantityAvailable, ProductType productType, boolean isAvailable, LocalDateTime createdAt, List<Subproduct> subProducts) {
+    public ParentProduct(String productId, String productName, String productDescription, Double price, Integer quantityAvailable, ProductType productType, boolean isAvailable, LocalDateTime createdAt, List<Subproduct> subProducts) {
         this.productId = productId;
         this.productName = productName;
         this.productDescription = productDescription;
