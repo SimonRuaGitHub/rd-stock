@@ -4,6 +4,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,5 +24,6 @@ public class ProductVersion {
     private Integer quantityAvailable;
     private boolean isAvailable;
     private LocalDateTime createdAt;
-    private List<Subproduct> subProducts;
+    @DocumentReference
+    private List<SubProductType> subProductTypes;
 }

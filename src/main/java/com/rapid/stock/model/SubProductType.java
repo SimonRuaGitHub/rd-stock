@@ -17,5 +17,5 @@ public class SubProductType {
     private String name;
     @Field(name = "description")
     private String descrip;
-    private List<Integer> subProductIds;
+    private List<Subproduct> subproducts;
 }
