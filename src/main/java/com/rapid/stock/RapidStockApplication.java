@@ -1,20 +1,11 @@
 package com.rapid.stock;
 
-import com.rapid.stock.model.Item;
-import com.rapid.stock.model.ParentProduct;
-import com.rapid.stock.model.ProductType;
-import com.rapid.stock.model.Subproduct;
 import com.rapid.stock.repository.ProductRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
 
 @SpringBootApplication
 public class RapidStockApplication {
@@ -25,7 +16,7 @@ public class RapidStockApplication {
     @Bean
     public CommandLineRunner runner(ProductRepository repository, MongoTemplate mongoTemplate){
            return args -> {
-                 System.out.println("Inserting ParentProduct");
+                /* System.out.println("Inserting ProductVersion");
 
                  List<Item> items = Arrays.asList(new Item(1,"Coca Cola", 0),
                                                   new Item(2,"Sprite", 0),
@@ -33,7 +24,7 @@ public class RapidStockApplication {
 
                  List<Subproduct> subproducts = Arrays.asList(new Subproduct(1,"drinks",true, items));
 
-                 ParentProduct parentProduct = new ParentProduct(
+                 ProductVersion parentProduct = new ProductVersion(
                           "2353565",
                           "Rapidogs Big",
                           "Rapidogs clásico con queso, tocineta, papas y gaseosa a elección.",
@@ -49,12 +40,12 @@ public class RapidStockApplication {
                                                  .and("isAvailable").is(true)
                                                  .and("quantityAvailable").gt(29));
 
-               List<ParentProduct> parentProducts = mongoTemplate.find(query, ParentProduct.class);
+               List<ProductVersion> parentProducts = mongoTemplate.find(query, ProductVersion.class);
 
                System.out.println("parentProducts found through query: ");
                parentProducts.forEach(System.out::println);
 
-               repository.insert(parentProduct);
+               repository.insert(parentProduct);*/
            };
     }
 }

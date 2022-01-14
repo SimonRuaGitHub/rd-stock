@@ -4,23 +4,23 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
 @Document
-public class ParentProduct {
+public class ProductVersion {
 
     @Id
     private String id;
     @Indexed(unique = true)
-    private String productId;
-    private String productName;
-    private String productDescription;
+    private String versionId;
+    private String name;
+    private String description;
+    private ProductType productType;
+    private Double price;
+    private Integer quantityAvailable;
+    private boolean isAvailable;
     private LocalDateTime createdAt;
-    @DocumentReference
-    private List<ProductVersion> productVersions;
-
+    private List<Subproduct> subProducts;
 }
