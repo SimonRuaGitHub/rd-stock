@@ -10,7 +10,7 @@ import java.util.List;
 
 @Document
 @Data
-public class SubProductType {
+public class SubProductType{
     @Id
     private String id;
     @Indexed(unique = true)
@@ -18,4 +18,11 @@ public class SubProductType {
     @Field(name = "description")
     private String descrip;
     private List<Subproduct> subproducts;
+
+    public SubProductType(String id, String name, String descrip, List<Subproduct> subproducts) {
+        this.id = id;
+        this.name = name;
+        this.descrip = descrip;
+        this.subproducts = subproducts;
+    }
 }
