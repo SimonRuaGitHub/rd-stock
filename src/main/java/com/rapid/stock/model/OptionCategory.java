@@ -10,19 +10,19 @@ import java.util.List;
 
 @Document
 @Data
-public class SubProductType{
+public class OptionType {
     @Id
     private String id;
     @Indexed(unique = true)
     private String name;
     @Field(name = "description")
     private String descrip;
-    private List<Subproduct> subproducts;
+    private List<Option> options;
 
-    public SubProductType(String id, String name, String descrip, List<Subproduct> subproducts) {
+    public OptionType(String id, String name, String descrip, List<Option> options) {
         this.id = id;
         this.name = name;
         this.descrip = descrip;
-        this.subproducts = subproducts;
+        this.options = options;
     }
 }
