@@ -1,7 +1,7 @@
 package com.rapid.stock.repository;
 
-import com.rapid.stock.model.OptionType;
+import com.rapid.stock.model.OptionCategory;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface OptionTypeRepository extends MongoRepository<OptionType, String> {
+public interface OptionCategoryRepository extends MongoRepository<OptionCategory, String> {
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Document
 @Data
-public class OptionType {
+public class OptionCategory {
     @Id
     private String id;
     @Indexed(unique = true)
@@ -19,7 +19,7 @@ public class OptionType {
     private String descrip;
     private List<Option> options;
 
-    public OptionType(String id, String name, String descrip, List<Option> options) {
+    public OptionCategory(String id, String name, String descrip, List<Option> options) {
         this.id = id;
         this.name = name;
         this.descrip = descrip;

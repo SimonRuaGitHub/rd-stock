@@ -3,7 +3,7 @@ package com.rapid.stock;
 import com.rapid.stock.model.*;
 import com.rapid.stock.repository.ParentProductRepository;
 import com.rapid.stock.repository.ProductVersionRepository;
-import com.rapid.stock.repository.SubproductTypeRepository;
+import com.rapid.stock.repository.OptionCategoryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,18 +22,18 @@ public class RapidStockApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(ParentProductRepository parentProdRepository, ProductVersionRepository productVersionRepository, SubproductTypeRepository subproductTypeRepository, MongoTemplate mongoTemplate){
+    public CommandLineRunner runner(ParentProductRepository parentProdRepository, ProductVersionRepository productVersionRepository, OptionCategoryRepository optionCategoryRepository, MongoTemplate mongoTemplate){
            return args -> {
                System.out.println("Inserting ProductVersion");
-               ArrayList<Subproduct> subproducts = new ArrayList<>();
-               subproducts.add(new Subproduct(1,"Salsa de Tomate", Double.valueOf(0)));
-               subproducts.add(new Subproduct(2, "Salsa Qbano", Double.valueOf(0)));
-               subproducts.add(new Subproduct(3, "Salsa de la casa", Double.valueOf(1000)));
+               ArrayList<Option> options = new ArrayList<>();
+               options.add(new Option(1,"Salsa de Tomate", Double.valueOf(0)));
+               options.add(new Option(2, "Salsa Qbano", Double.valueOf(0)));
+               options.add(new Option(3, "Salsa de la casa", Double.valueOf(1000)));
 
-               ArrayList<SubProductType> subProductTypes = new ArrayList<>();
-               subProductTypes.add(new SubProductType(new ObjectId().toString(),"Elige tus salsas y complementos aparte", "seleccion de salsas y complementos", subproducts));
+               ArrayList<OptionCategory> optionCategories = new ArrayList<>();
+               optionCategories.add(new OptionCategory(new ObjectId().toString(),"Elige tus salsas y complementos aparte", "seleccion de salsas y complementos", options));
 
-               subproductTypeRepository.saveAll(subProductTypes);
+               optionCategoryRepository.saveAll(optionCategories);
 
                ArrayList<ProductVersion> productVersions = new ArrayList<>();
                productVersions.add(new ProductVersion(
@@ -46,7 +46,7 @@ public class RapidStockApplication {
                        30,
                        true,
                        LocalDateTime.now(),
-                       subProductTypes
+                       optionCategories
                ));
 
                productVersionRepository.saveAll(productVersions);

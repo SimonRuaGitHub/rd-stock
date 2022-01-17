@@ -3,7 +3,6 @@ package com.rapid.stock.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
@@ -26,9 +25,9 @@ public class ProductVersion{
     private boolean isAvailable;
     private LocalDateTime createdAt;
     @DocumentReference
-    private List<SubProductType> subProductTypes;
+    private List<OptionCategory> optionCategories;
 
-    public ProductVersion(String id, String versionId, String name, String description, ProductType productType, Double price, Integer quantityAvailable, boolean isAvailable, LocalDateTime createdAt, List<SubProductType> subProductTypes) {
+    public ProductVersion(String id, String versionId, String name, String description, ProductType productType, Double price, Integer quantityAvailable, boolean isAvailable, LocalDateTime createdAt, List<OptionCategory> optionCategories) {
         this.id = id;
         this.versionId = versionId;
         this.name = name;
@@ -38,6 +37,6 @@ public class ProductVersion{
         this.quantityAvailable = quantityAvailable;
         this.isAvailable = isAvailable;
         this.createdAt = createdAt;
-        this.subProductTypes = subProductTypes;
+        this.optionCategories = optionCategories;
     }
 }

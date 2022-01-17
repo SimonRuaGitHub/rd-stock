@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class Subproduct{
+public class Option {
 
     private int id;
     private String name;
