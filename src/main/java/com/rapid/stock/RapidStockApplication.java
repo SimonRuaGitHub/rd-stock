@@ -23,7 +23,7 @@ public class RapidStockApplication {
     @Bean
     public CommandLineRunner runner(ParentProductRepository parentProdRepository, OptionCategoryRepository optionCategoryRepository, MongoTemplate mongoTemplate){
            return args -> {
-               System.out.println("Inserting ProductVersion");
+               /*System.out.println("Inserting ProductVersion");
                ArrayList<Option> options = new ArrayList<>();
                options.add(new Option(1,"Salsa de Tomate", Double.valueOf(0)));
                options.add(new Option(2, "Salsa Qbano", Double.valueOf(0)));
@@ -56,7 +56,7 @@ public class RapidStockApplication {
                         productVersions
                );
 
-               parentProdRepository.save(parentProduct);
+               parentProdRepository.save(parentProduct);*/
            };
     }
 }

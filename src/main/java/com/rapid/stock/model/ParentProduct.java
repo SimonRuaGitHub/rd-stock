@@ -1,7 +1,6 @@
 package com.rapid.stock.model;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,7 +10,6 @@ import java.util.List;
 
 @Data
 @Document
-@Builder
 public class ParentProduct{
 
     @Id
@@ -23,6 +21,7 @@ public class ParentProduct{
     private LocalDateTime createdAt;
     private List<ProductVersion> productVersions;
 
+    @Builder
     public ParentProduct(String productId, String productName, String productDescription, LocalDateTime createdAt, List<ProductVersion> productVersions) {
         this.productId = productId;
         this.productName = productName;
