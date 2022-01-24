@@ -21,7 +21,6 @@ public class ParentProduct{
     private String productName;
     private String productDescription;
     private LocalDateTime createdAt;
-    @DocumentReference
     private List<ProductVersion> productVersions;
 
     public ParentProduct(String productId, String productName, String productDescription, LocalDateTime createdAt, List<ProductVersion> productVersions) {

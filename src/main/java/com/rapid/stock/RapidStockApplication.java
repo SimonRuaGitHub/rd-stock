@@ -2,7 +2,6 @@ package com.rapid.stock;
 
 import com.rapid.stock.model.*;
 import com.rapid.stock.repository.ParentProductRepository;
-import com.rapid.stock.repository.ProductVersionRepository;
 import com.rapid.stock.repository.OptionCategoryRepository;
 import org.bson.types.ObjectId;
 import org.springframework.boot.CommandLineRunner;
@@ -22,7 +21,7 @@ public class RapidStockApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(ParentProductRepository parentProdRepository, ProductVersionRepository productVersionRepository, OptionCategoryRepository optionCategoryRepository, MongoTemplate mongoTemplate){
+    public CommandLineRunner runner(ParentProductRepository parentProdRepository, OptionCategoryRepository optionCategoryRepository, MongoTemplate mongoTemplate){
            return args -> {
                System.out.println("Inserting ProductVersion");
                ArrayList<Option> options = new ArrayList<>();
@@ -48,8 +47,6 @@ public class RapidStockApplication {
                        LocalDateTime.now(),
                        optionCategories
                ));
-
-               productVersionRepository.saveAll(productVersions);
 
                ParentProduct parentProduct = new ParentProduct(
                        "2353565",
