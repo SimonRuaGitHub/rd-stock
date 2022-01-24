@@ -1,8 +1,7 @@
 package com.rapid.stock.service;
 
-import com.rapid.stock.model.ParentProduct;
-import com.rapid.stock.model.ProductVersion;
+import com.rapid.stock.dto.ParentProductSaveRequest;
 
 public interface ProductService {
-    public void save(ParentProduct parentProduct);
+    public void save(ParentProductSaveRequest parentProductDto);
 }
