@@ -17,7 +17,14 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public void save(ParentProductSaveRequest parentProductDto) throws SaveException {
-           ParentProduct parentProduct = parentProductMapper.mapSaveRequest(parentProductDto);
-           productRepository.insert(parentProduct);
+
+         ParentProduct parentProduct = parentProductMapper.mapSaveRequest(parentProductDto);
+
+          try{
+               productRepository.insert(parentProduct);
+           }catch(Exception ex){
+               ex.printStackTrace();
+               throw new SaveException("Failed to save following product with id: "+parentProduct.getProductId());
+           }
     }
 }
