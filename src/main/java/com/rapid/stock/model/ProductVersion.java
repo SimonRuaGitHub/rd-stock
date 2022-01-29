@@ -1,6 +1,5 @@
 package com.rapid.stock.model;
 
-import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -26,8 +25,8 @@ public class ProductVersion{
     @DocumentReference
     private List<OptionCategory> optionCategories;
 
-    @Builder
-    public ProductVersion(String versionId, String name, String description, ProductType productType, Double price, Integer quantityAvailable, boolean isAvailable, LocalDateTime createdAt, List<OptionCategory> optionCategories) {
+    public ProductVersion(String id, String versionId, String name, String description, ProductType productType, Double price, Integer quantityAvailable, boolean isAvailable, LocalDateTime createdAt, List<OptionCategory> optionCategories) {
+        this.id = id;
         this.versionId = versionId;
         this.name = name;
         this.description = description;
