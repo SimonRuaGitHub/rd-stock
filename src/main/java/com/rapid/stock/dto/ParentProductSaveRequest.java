@@ -9,5 +9,5 @@ public class ParentProductSaveRequest {
        private String productId;
        private String productName;
        private String productDescription;
-       private List<ProductVersionSaveRequest> productVersions;
+       private List<ProductVersion> productVersions;
 }
