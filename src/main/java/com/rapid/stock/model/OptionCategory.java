@@ -13,7 +13,7 @@ import java.util.List;
 public class OptionCategory {
     @Id
     private String id;
-    @Indexed(unique = true)
+    @Indexed(unique = true,sparse = true)
     private String name;
     @Field(name = "description")
     private String descrip;
