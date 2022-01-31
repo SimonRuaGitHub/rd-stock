@@ -7,6 +7,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,11 +20,19 @@ public class ProductVersion{
     @Id
     private String id;
     @Indexed(unique = true, sparse = true)
+    @NotBlank(message = "version Id can't be blank")
     private String versionId;
+    @NotBlank(message = "version name can't be blank")
     private String name;
+    @NotBlank(message = "version description can't be blank")
     private String description;
+    //@NotBlank(message = "version product type can't be blank")
     private ProductType productType;
+    @Min(value=0, message = "price can't be less than 0")
+    @NotNull(message = "price can't be null")
     private Double price;
+    @Min(value=0, message = "quantity can't be less than 0")
+    @NotNull(message = "quantity can't be null")
     private Integer quantityAvailable;
     private boolean isAvailable;
     private LocalDateTime createdAt;

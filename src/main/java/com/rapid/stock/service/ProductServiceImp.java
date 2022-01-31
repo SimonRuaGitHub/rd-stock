@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.ConstraintDeclarationException;
 import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
 import javax.validation.Validator;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,12 +28,12 @@ public class ProductServiceImp implements ProductService {
 
          ParentProduct parentProduct = parentProductMapper.mapSaveRequest(parentProductDto);
 
-        Set<ConstraintViolation<ParentProduct>> violations = validator.validate(parentProduct);
+         Set<ConstraintViolation<ParentProduct>> violations = validator.validate(parentProduct);
 
-        if(!violations.isEmpty()) {
+         if(!violations.isEmpty()) {
             String violationsStr = violations.stream().map(violation -> violation.getMessage()).collect(Collectors.joining("|"));
             throw new SaveException("Some of the fields have invalid have invalid data or no data at all: "+violationsStr);
-        }
+         }
 
           try{
                productRepository.insert(parentProduct);
