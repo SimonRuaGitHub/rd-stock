@@ -1,6 +1,5 @@
 package com.rapid.stock.dto;
 
-import com.rapid.stock.model.ProductVersion;
 import lombok.Data;
 import java.util.List;
 

@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -15,8 +16,11 @@ public class ParentProduct{
     @Id
     private String id;
     @Indexed(unique = true)
+    @NotBlank(message = "product id can't be blank")
     private String productId;
+    @NotBlank(message = "name can't be blank")
     private String productName;
+    @NotBlank(message = "description can't be blank")
     private String productDescription;
     private LocalDateTime createdAt;
     private List<ProductVersion> productVersions;

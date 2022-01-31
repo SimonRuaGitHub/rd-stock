@@ -20,6 +20,6 @@ public class ControllerExceptionMapping {
     @ExceptionHandler(SaveException.class)
     public ResponseEntity<RestExceptionResult> handleUnableToSaveEntity(SaveException ex){
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(new RestExceptionResult(ex.getMessage()));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestExceptionResult(ex.getMessage()));
     }
 }
