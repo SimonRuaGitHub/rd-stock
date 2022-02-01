@@ -30,16 +30,24 @@ public class ProductServiceImp implements ProductService {
 
          Set<ConstraintViolation<ParentProduct>> violations = validator.validate(parentProduct);
 
-         if(!violations.isEmpty()) {
+         if(!violations.isEmpty() || parentProduct.getProductVersions().stream().anyMatch(productVersion -> productVersion.getProductType() == null)) {
             String violationsStr = violations.stream().map(violation -> violation.getMessage()).collect(Collectors.joining("|"));
+
+            if(parentProduct.getProductVersions().stream().anyMatch(productVersion -> productVersion.getProductType() == null)) {
+                if (violationsStr == null || violationsStr.isEmpty())
+                    violationsStr = "version product type can't be blank";
+                else
+                    violationsStr = violationsStr + "|" + "version product type can't be blank";
+            }
+
             throw new SaveException("Some of the fields have invalid have invalid data or no data at all: "+violationsStr);
          }
 
-          try{
+         try{
                productRepository.insert(parentProduct);
-           }catch(Exception ex){
+         }catch(Exception ex){
                ex.printStackTrace();
                throw new SaveException("Failed to save following product with id: "+parentProduct.getProductId());
-           }
+         }
     }
 }
