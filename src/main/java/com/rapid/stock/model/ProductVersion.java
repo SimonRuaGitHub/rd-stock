@@ -51,4 +51,7 @@ public class ProductVersion{
         this.createdAt = createdAt;
         this.optionCategories = optionCategories;
     }
+
+    public ProductVersion() {
+    }
 }

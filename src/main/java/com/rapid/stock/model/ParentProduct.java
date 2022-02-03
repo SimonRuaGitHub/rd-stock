@@ -35,4 +35,7 @@ public class ParentProduct{
         this.createdAt = createdAt;
         this.productVersions = productVersions;
     }
+
+    public ParentProduct() {
+    }
 }
