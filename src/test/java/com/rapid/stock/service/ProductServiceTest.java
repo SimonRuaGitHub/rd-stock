@@ -44,7 +44,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void can_create_a_main_product_with_product_versions_only(){
+    public void can_create_a_main_product_with_product_version(){
             //Given
             ParentProductSaveRequest ppSaveRequest = Mockito.mock(ParentProductSaveRequest.class);
 
@@ -139,6 +139,82 @@ public class ProductServiceTest {
         expectedParentProduct.setProductDescription("prod_description");
         expectedParentProduct.setCreatedAt(LocalDateTime.now());
         expectedParentProduct.setProductVersions(null);
+
+        when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
+
+        //When
+        Throwable exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
+
+        //Then
+        assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
+        String validationsMessage = exception.getMessage().split(":")[1];
+        assertFalse(validationsMessage == null || validationsMessage.isEmpty());
+    }
+
+    @Test
+    public void cannot_create_main_product_with_product_versions_with_invalid_data_in_all_fields(){
+        //Given
+        ParentProductSaveRequest ppSaveRequest = Mockito.mock(ParentProductSaveRequest.class);
+
+        ProductVersion productVersionA = new ProductVersion();
+        productVersionA.setVersionId("");
+        productVersionA.setName("");
+        productVersionA.setDescription(null);
+        productVersionA.setAvailable(true);
+        productVersionA.setProductType(null);
+        productVersionA.setCreatedAt(null);
+        productVersionA.setPrice(Double.valueOf(-1));
+        productVersionA.setQuantityAvailable(Integer.valueOf(-1));
+
+        ProductVersion productVersionB = new ProductVersion();
+        productVersionB.setVersionId("");
+        productVersionB.setName("");
+        productVersionB.setDescription(null);
+        productVersionB.setAvailable(true);
+        productVersionB.setProductType(null);
+        productVersionB.setCreatedAt(null);
+        productVersionB.setPrice(Double.valueOf(-1));
+        productVersionB.setQuantityAvailable(Integer.valueOf(-1));
+
+        ParentProduct expectedParentProduct = new ParentProduct();
+        expectedParentProduct.setProductId(null);
+        expectedParentProduct.setProductName("");
+        expectedParentProduct.setProductDescription("");
+        expectedParentProduct.setCreatedAt(null);
+        expectedParentProduct.setProductVersions(Arrays.asList(productVersionA,productVersionB));
+
+        when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
+
+        //When
+        Throwable exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
+
+        //Then
+        assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
+        String validationsMessage = exception.getMessage().split(":")[1];
+        assertFalse(validationsMessage == null || validationsMessage.isEmpty());
+    }
+
+    @Test
+    public void cannot_create_main_product_with_product_versions_with_invalid_data_in_product_type(){
+        //Given
+        ParentProductSaveRequest ppSaveRequest = Mockito.mock(ParentProductSaveRequest.class);
+
+        ProductVersion productVersion = new ProductVersion();
+        productVersion.setVersionId("anyselftgeneratedstringUUID");
+        productVersion.setName("prod_version_name");
+        productVersion.setDescription("prod_version_description");
+        productVersion.setAvailable(true);
+        productVersion.setProductType(null);
+        productVersion.setCreatedAt(LocalDateTime.now());
+        productVersion.setPrice(Double.valueOf(0));
+        productVersion.setQuantityAvailable(Integer.valueOf(90));
+
+        ParentProduct expectedParentProduct = new ParentProduct();
+        expectedParentProduct.setProductId("23523352");
+        expectedParentProduct.setProductName("product_name");
+        expectedParentProduct.setProductDescription("prod_description");
+        expectedParentProduct.setCreatedAt(LocalDateTime.now());
+        expectedParentProduct.setProductVersions(Arrays.asList(productVersion));
 
         when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
 
