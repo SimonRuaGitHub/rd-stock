@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class ParentProduct{
     private String productName;
     @NotBlank(message = "description can't be blank")
     private String productDescription;
+    @NotNull
     private LocalDateTime createdAt;
     @Valid
     private List<ProductVersion> productVersions;

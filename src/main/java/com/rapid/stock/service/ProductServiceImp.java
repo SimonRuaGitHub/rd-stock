@@ -1,6 +1,7 @@
 package com.rapid.stock.service;
 
 import com.rapid.stock.dto.ParentProductSaveRequest;
+import com.rapid.stock.exception.InvalidDataFieldException;
 import com.rapid.stock.exception.SaveException;
 import com.rapid.stock.mapper.ParentProductMapper;
 import com.rapid.stock.model.ParentProduct;
@@ -24,7 +25,7 @@ public class ProductServiceImp implements ProductService {
     private final Validator validator;
 
     @Override
-    public ParentProduct save(ParentProductSaveRequest parentProductDto) throws SaveException {
+    public ParentProduct save(ParentProductSaveRequest parentProductDto) {
 
          ParentProduct parentProduct = parentProductMapper.mapSaveRequest(parentProductDto);
 
@@ -34,16 +35,17 @@ public class ProductServiceImp implements ProductService {
            ((parentProduct.getProductVersions() != null && !parentProduct.getProductVersions().isEmpty()) &&
              parentProduct.getProductVersions().stream().anyMatch(productVersion -> productVersion.getProductType() == null))) {
 
-            String violationsStr = violations.stream().map(violation -> violation.getMessage()).collect(Collectors.joining("|"));
+             String violationsStr = violations.stream().map(violation -> violation.getMessage()).collect(Collectors.joining("|"));
 
-                 if(parentProduct.getProductVersions().stream().anyMatch(productVersion -> productVersion.getProductType() == null)) {
+                 if( (parentProduct.getProductVersions() != null && !parentProduct.getProductVersions().isEmpty()) &&
+                      parentProduct.getProductVersions().stream().anyMatch(productVersion -> productVersion.getProductType() == null) ) {
                      if (violationsStr == null || violationsStr.isEmpty())
                          violationsStr = "version product type can't be blank";
                      else
                          violationsStr = violationsStr + "|" + "version product type can't be blank";
                  }
 
-                 throw new SaveException("Some of the fields have invalid have invalid data or no data at all: "+violationsStr);
+                 throw new InvalidDataFieldException("Some of the fields have invalid have invalid data or no data at all: "+violationsStr);
         }
 
          try{

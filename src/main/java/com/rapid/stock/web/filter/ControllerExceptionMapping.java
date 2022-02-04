@@ -1,6 +1,7 @@
 package com.rapid.stock.web.filter;
 
 import com.rapid.stock.dto.RestExceptionResult;
+import com.rapid.stock.exception.InvalidDataFieldException;
 import com.rapid.stock.exception.NotFoundException;
 import com.rapid.stock.exception.SaveException;
 import org.springframework.http.HttpStatus;
@@ -21,5 +22,11 @@ public class ControllerExceptionMapping {
     public ResponseEntity<RestExceptionResult> handleUnableToSaveEntity(SaveException ex){
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestExceptionResult(ex.getMessage()));
+    }
+
+    @ExceptionHandler(InvalidDataFieldException.class)
+    public ResponseEntity<RestExceptionResult> handleUnableToSaveEntity(InvalidDataFieldException ex){
+        ex.printStackTrace();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new RestExceptionResult(ex.getMessage()));
     }
 }
