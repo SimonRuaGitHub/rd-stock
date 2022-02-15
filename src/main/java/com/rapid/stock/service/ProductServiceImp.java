@@ -9,9 +9,7 @@ import com.rapid.stock.repository.ParentProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.validation.ConstraintDeclarationException;
 import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
 import javax.validation.Validator;
 import java.util.Set;
 import java.util.stream.Collectors;
