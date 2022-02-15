@@ -9,5 +9,5 @@ public class OptionCategorySaveRequest {
     private String name;
     private String description;
     private String label;
-    private List<OptionSaveRequest> optionList;
+    private List<OptionSaveRequest> options;
 }

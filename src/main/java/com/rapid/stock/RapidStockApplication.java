@@ -22,41 +22,6 @@ public class RapidStockApplication {
 
     @Bean
     public CommandLineRunner runner(ParentProductRepository parentProdRepository, OptionCategoryRepository optionCategoryRepository, MongoTemplate mongoTemplate){
-           return args -> {
-               /*System.out.println("Inserting ProductVersion");
-               ArrayList<Option> options = new ArrayList<>();
-               options.add(new Option(1,"Salsa de Tomate", Double.valueOf(0)));
-               options.add(new Option(2, "Salsa Qbano", Double.valueOf(0)));
-               options.add(new Option(3, "Salsa de la casa", Double.valueOf(1000)));
-
-               ArrayList<OptionCategory> optionCategories = new ArrayList<>();
-               optionCategories.add(new OptionCategory(new ObjectId().toString(),"Elige tus salsas y complementos aparte", "seleccion de salsas y complementos", options));
-
-               optionCategoryRepository.saveAll(optionCategories);
-
-               ArrayList<ProductVersion> productVersions = new ArrayList<>();
-               productVersions.add(new ProductVersion(
-                       new ObjectId().toString(),
-                       UUID.randomUUID().toString(),
-                       "Combo Rapidgos Big con queso, tocineta, papas y gasesosa",
-                       "Combo con papas y gaseos agrandadas",
-                       ProductType.MENU_RESTAURANT,
-                       Double.valueOf(17000.9),
-                       30,
-                       true,
-                       LocalDateTime.now(),
-                       optionCategories
-               ));
-
-               ParentProduct parentProduct = new ParentProduct(
-                       "2353565",
-                       "Rapidogs Big",
-                       "Rapidogs clásico con queso, tocineta, papas y gaseosa agrandadas.",
-                        LocalDateTime.now(),
-                        productVersions
-               );
-
-               parentProdRepository.save(parentProduct);*/
-           };
+           return args -> {};
     }
 }

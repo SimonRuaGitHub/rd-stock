@@ -26,7 +26,7 @@ public class OptionServiceImp implements OptionService{
     @Override
     public OptionCategory save(OptionCategorySaveRequest optionCategorySaveRequest) {
 
-           OptionCategory optionCategory = optionMapper.mapSaveRequest(optionCategorySaveRequest);
+           OptionCategory optionCategory = optionMapper.mapCategorySaveRequest(optionCategorySaveRequest);
 
            Set<ConstraintViolation<OptionCategory>> violations = validator.validate(optionCategory);
 

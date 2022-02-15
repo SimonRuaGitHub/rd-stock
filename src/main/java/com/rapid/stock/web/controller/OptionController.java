@@ -1,7 +1,7 @@
 package com.rapid.stock.web.controller;
 
-import com.rapid.stock.dto.ParentProductSaveRequest;
-import com.rapid.stock.service.ProductService;
+import com.rapid.stock.dto.OptionCategorySaveRequest;
+import com.rapid.stock.service.OptionService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/product")
+@RequestMapping("/api/option")
 @AllArgsConstructor
-public class ProductController {
+public class OptionController {
 
-    private final ProductService productService;
+    private final OptionService optionService;
 
     @PostMapping
-    public ResponseEntity saveProduct(@RequestBody ParentProductSaveRequest ppSaveRequest){
-           productService.save(ppSaveRequest);
-           return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity saveOptions(@RequestBody OptionCategorySaveRequest optionCategorySaveRequest){
+        optionService.save(optionCategorySaveRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

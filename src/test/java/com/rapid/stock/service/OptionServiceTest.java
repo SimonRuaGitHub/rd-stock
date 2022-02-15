@@ -63,7 +63,7 @@ public class OptionServiceTest {
                                                                                                        )
                                                                     ).build();
 
-            when(optionMapper.mapSaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(expectedOptionCategory);
+            when(optionMapper.mapCategorySaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(expectedOptionCategory);
 
             //When
             optionServiceImp.save(Mockito.mock(OptionCategorySaveRequest.class));
@@ -78,12 +78,12 @@ public class OptionServiceTest {
     @Test
     public void cannot_create_option_category_without_options(){
             //Given
-            OptionCategory expectedOptionCategory = OptionCategory.builder().name("drinks")
+            OptionCategory optionCategory = OptionCategory.builder().name("drinks")
                                                                             .descrip("Selection of drinks")
                                                                             .label("Elige tu bebida")
                                                                             .options(null).build();
 
-            when(optionMapper.mapSaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(expectedOptionCategory);
+            when(optionMapper.mapCategorySaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(optionCategory);
 
             //When
             Throwable exception = assertThrows(InvalidDataFieldException.class, () -> optionServiceImp.save(Mockito.mock(OptionCategorySaveRequest.class)));
@@ -95,7 +95,7 @@ public class OptionServiceTest {
     @Test
     public void cannot_create_option_category_with_errors_in_some_fields(){
         //Given
-        OptionCategory expectedOptionCategory = OptionCategory.builder().name("drinks")
+        OptionCategory optionCategory = OptionCategory.builder().name("drinks")
                 .descrip("")
                 .label("Elige tu bebida")
                 .options( Arrays.asList(Option.builder()
@@ -109,7 +109,7 @@ public class OptionServiceTest {
                         )
                 ).build();
 
-        when(optionMapper.mapSaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(expectedOptionCategory);
+        when(optionMapper.mapCategorySaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(optionCategory);
 
         //When
         Throwable exception = assertThrows(InvalidDataFieldException.class, () -> optionServiceImp.save(Mockito.mock(OptionCategorySaveRequest.class)));
