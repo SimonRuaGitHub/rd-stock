@@ -1,5 +1,6 @@
 package com.rapid.stock.model;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -19,8 +20,8 @@ public class OptionCategory {
     private String descrip;
     private List<Option> options;
 
-    public OptionCategory(String id, String name, String descrip, List<Option> options) {
-        this.id = id;
+    @Builder
+    public OptionCategory(String name, String descrip, List<Option> options) {
         this.name = name;
         this.descrip = descrip;
         this.options = options;
