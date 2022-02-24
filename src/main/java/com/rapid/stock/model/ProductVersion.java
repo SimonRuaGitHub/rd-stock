@@ -24,7 +24,7 @@ public class ProductVersion{
     private String name;
     @NotBlank(message = "version description can't be blank")
     private String description;
-    //@NotBlank(message = "version product type can't be blank")
+    @NotNull(message = "product type can't be null")
     private ProductType productType;
     @Min(value=0, message = "price can't be less than 0")
     @NotNull(message = "price can't be null")
