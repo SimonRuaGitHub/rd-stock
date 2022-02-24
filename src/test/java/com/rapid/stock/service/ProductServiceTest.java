@@ -219,11 +219,10 @@ public class ProductServiceTest {
         when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
 
         //When
-        Throwable exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
+        InvalidDataFieldException exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
 
         //Then
         assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
-        String validationsMessage = exception.getMessage().split(":")[1];
-        assertFalse(validationsMessage == null || validationsMessage.isEmpty());
+        assertFalse(exception.getViolations().isEmpty(),"It should appear some violations");
     }
 }

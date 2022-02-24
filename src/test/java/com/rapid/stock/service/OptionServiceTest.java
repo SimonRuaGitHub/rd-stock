@@ -112,9 +112,10 @@ public class OptionServiceTest {
         when(optionMapper.mapCategorySaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(optionCategory);
 
         //When
-        Throwable exception = assertThrows(InvalidDataFieldException.class, () -> optionServiceImp.save(Mockito.mock(OptionCategorySaveRequest.class)));
+        InvalidDataFieldException exception = assertThrows(InvalidDataFieldException.class, () -> optionServiceImp.save(Mockito.mock(OptionCategorySaveRequest.class)));
 
         //Thens
         assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
+        assertFalse(exception.getViolations().isEmpty(), "It should appear some violations");
     }
 }

@@ -8,6 +8,7 @@ import com.rapid.stock.model.ParentProduct;
 import com.rapid.stock.repository.ParentProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -27,23 +28,10 @@ public class ProductServiceImp implements ProductService {
 
          ParentProduct parentProduct = parentProductMapper.mapSaveRequest(parentProductDto);
 
-         Set<ConstraintViolation<ParentProduct>> violations = validator.validate(parentProduct);
+         Set<ConstraintViolation<Object>> violations = validator.validate(parentProduct);
 
-        if(!violations.isEmpty() ||
-           ((parentProduct.getProductVersions() != null && !parentProduct.getProductVersions().isEmpty()) &&
-             parentProduct.getProductVersions().stream().anyMatch(productVersion -> productVersion.getProductType() == null))) {
-
-             String violationsStr = violations.stream().map(violation -> violation.getMessage()).collect(Collectors.joining("|"));
-
-                 if( (parentProduct.getProductVersions() != null && !parentProduct.getProductVersions().isEmpty()) &&
-                      parentProduct.getProductVersions().stream().anyMatch(productVersion -> productVersion.getProductType() == null) ) {
-                     if (violationsStr == null || violationsStr.isEmpty())
-                         violationsStr = "version product type can't be blank";
-                     else
-                         violationsStr = violationsStr + "|" + "version product type can't be blank";
-                 }
-
-                 throw new InvalidDataFieldException("Some of the fields have invalid have invalid data or no data at all: "+violationsStr);
+        if(!violations.isEmpty()) {
+            throw new InvalidDataFieldException("Some of the fields have invalid have invalid data or no data at all", violations);
         }
 
          try{

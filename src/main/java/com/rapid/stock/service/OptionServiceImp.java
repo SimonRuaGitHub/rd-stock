@@ -26,12 +26,12 @@ public class OptionServiceImp implements OptionService{
     @Override
     public OptionCategory save(OptionCategorySaveRequest optionCategorySaveRequest) {
 
-           OptionCategory optionCategory = optionMapper.mapCategorySaveRequest(optionCategorySaveRequest);
+          @Valid OptionCategory optionCategory = optionMapper.mapCategorySaveRequest(optionCategorySaveRequest);
 
-           Set<ConstraintViolation<OptionCategory>> violations = validator.validate(optionCategory);
+           Set<ConstraintViolation<Object>> violations = validator.validate(optionCategory);
 
            if(!violations.isEmpty())
-              throw new InvalidDataFieldException("Some of the fields have invalid have invalid data or no data at all");
+              throw new InvalidDataFieldException("Some of the fields have invalid have invalid data or no data at all", violations);
 
            try{
               return optionCategoryRepository.insert(optionCategory);
