@@ -103,7 +103,7 @@ public class OptionServiceTest {
                                         .name("Coca cola")
                                         .price(Double.valueOf(0)).build(),
                                 Option.builder()
-                                        .id(0)
+                                        .id(2)
                                         .name("Mr tea")
                                         .price(Double.valueOf(-1)).build()
                         )

@@ -3,10 +3,10 @@ package com.rapid.stock.model;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
@@ -26,6 +26,7 @@ public class OptionCategory {
     @NotBlank(message = "label can't  be blank")
     private String label;
     @NotEmpty
+    @Valid
     private List<Option> options;
 
     @Builder
