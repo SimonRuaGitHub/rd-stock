@@ -19,8 +19,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -120,12 +119,11 @@ public class ProductServiceTest {
         when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
 
         //When
-        Throwable exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
+        InvalidDataFieldException exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
 
         //Then
         assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
-        String validationsMessage = exception.getMessage().split(":")[1];
-        assertFalse(validationsMessage == null || validationsMessage.isEmpty());
+        assertFalse(exception.getViolations().isEmpty());
     }
 
     @Test
@@ -143,18 +141,18 @@ public class ProductServiceTest {
         when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
 
         //When
-        Throwable exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
+        InvalidDataFieldException exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
 
         //Then
         assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
-        String validationsMessage = exception.getMessage().split(":")[1];
-        assertFalse(validationsMessage == null || validationsMessage.isEmpty());
+        assertFalse(exception.getViolations().isEmpty());
     }
 
     @Test
     public void cannot_create_main_product_with_product_versions_with_invalid_data_in_all_fields(){
         //Given
         ParentProductSaveRequest ppSaveRequest = Mockito.mock(ParentProductSaveRequest.class);
+        int expectedFields = 18;
 
         ProductVersion productVersionA = new ProductVersion();
         productVersionA.setVersionId("");
@@ -186,12 +184,11 @@ public class ProductServiceTest {
         when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
 
         //When
-        Throwable exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
+        InvalidDataFieldException exception = assertThrows(InvalidDataFieldException.class, () -> productService.save(ppSaveRequest) );
 
         //Then
         assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
-        String validationsMessage = exception.getMessage().split(":")[1];
-        assertFalse(validationsMessage == null || validationsMessage.isEmpty());
+        assertEquals(exception.getViolations().size(), expectedFields, "Quantity of actual invalid fields is not equal to expected one");
     }
 
     @Test

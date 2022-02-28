@@ -33,6 +33,7 @@ public class ProductVersion{
     @NotNull(message = "quantity can't be null")
     private Integer quantityAvailable;
     private boolean isAvailable;
+    @NotNull
     private LocalDateTime createdAt;
     @DocumentReference
     private List<OptionCategory> optionCategories;

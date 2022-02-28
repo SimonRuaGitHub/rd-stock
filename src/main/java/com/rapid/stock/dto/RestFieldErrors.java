@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @Builder
 public class RestFieldErrors {
-    private String field;
-    private String message;
+    private List<String> errorMessages;
 }
