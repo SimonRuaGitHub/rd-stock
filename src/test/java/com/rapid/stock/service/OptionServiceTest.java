@@ -21,8 +21,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -109,6 +108,8 @@ public class OptionServiceTest {
                         )
                 ).build();
 
+        int qtyFieldsWithErrors = 2;
+
         when(optionMapper.mapCategorySaveRequest(any(OptionCategorySaveRequest.class))).thenReturn(optionCategory);
 
         //When
@@ -116,6 +117,6 @@ public class OptionServiceTest {
 
         //Thens
         assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
-        assertFalse(exception.getViolations().isEmpty(), "It should appear some violations");
+        assertEquals(exception.getViolations().size(), qtyFieldsWithErrors,"Actual fields with error quantity is not same as expected one");
     }
 }

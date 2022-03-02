@@ -13,13 +13,13 @@ import javax.validation.constraints.NotNull;
 @Builder
 public class Option {
 
-    @Min(value = 1, message = "id can't be less or equal to 0")
+    @Min(value = 1, message = "Option id can't be less or equal to 0")
     private int id;
 
-    @NotEmpty(message = "name can't be blank")
+    @NotEmpty(message = "Option name can't be blank")
     private String name;
 
-    @Min(value = 0, message = "price can't be less than 0")
+    @Min(value = 0, message = "Option price can't be less than 0")
     @NotNull
     private Double price;
 }

@@ -16,21 +16,20 @@ import java.util.List;
 public class OptionCategory {
     @Id
     private String id;
-    @NotBlank(message = "name can't  be blank")
+    @NotBlank(message = "Option category name can't  be blank")
     private String name;
     @Field(name = "description")
-    @NotBlank
-    @NotBlank(message = "description can't  be blank")
+    @NotBlank(message = "Option category description can't  be blank")
     private String descrip;
-    @NotBlank
-    @NotBlank(message = "label can't  be blank")
+    @NotBlank(message = "Option category label can't  be blank")
     private String label;
-    @NotEmpty
+
     @Valid
+    @NotEmpty(message = "List of options must not be empty")
     private List<Option> options;
 
     @Builder
-    public OptionCategory(String name, String descrip, String label ,List<Option> options) {
+    public OptionCategory(String name, String descrip, String label , List<Option> options) {
         this.name = name;
         this.descrip = descrip;
         this.label = label;
