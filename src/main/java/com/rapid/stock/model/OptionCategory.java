@@ -2,6 +2,7 @@ package com.rapid.stock.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @Document
 @Data
+@NoArgsConstructor
 public class OptionCategory {
     @Id
     private String id;

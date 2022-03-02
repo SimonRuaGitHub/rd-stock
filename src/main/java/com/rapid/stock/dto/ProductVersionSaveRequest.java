@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 
+import java.util.List;
+
 @Data
 public class ProductVersionSaveRequest {
 
@@ -16,6 +18,7 @@ public class ProductVersionSaveRequest {
     private Integer quantityAvailable;
     @Getter(AccessLevel.NONE)
     private boolean isAvailable;
+    private List<String> optionCategoriesIds;
 
     @JsonProperty("isAvailable")
     public boolean isAvailable(){
