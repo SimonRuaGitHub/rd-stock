@@ -3,6 +3,7 @@ package com.rapid.stock.service;
 import com.rapid.stock.dto.ParentProductSaveRequest;
 import com.rapid.stock.exception.InvalidDataFieldException;
 import com.rapid.stock.mapper.ParentProductMapper;
+import com.rapid.stock.model.OptionCategory;
 import com.rapid.stock.model.ParentProduct;
 import com.rapid.stock.model.ProductType;
 import com.rapid.stock.model.ProductVersion;
@@ -221,5 +222,42 @@ public class ProductServiceTest {
         //Then
         assertThat(exception.getMessage()).contains("Some of the fields have invalid have invalid data or no data at all");
         assertFalse(exception.getViolations().isEmpty(),"It should appear some violations");
+    }
+
+    @Test
+    public void can_create_a_main_product_with_product_version_and_options(){
+        //Given
+        ParentProductSaveRequest ppSaveRequest = Mockito.mock(ParentProductSaveRequest.class);
+
+        ProductVersion productVersion = new ProductVersion();
+        productVersion.setVersionId("anyselftgeneratedstringUUID");
+        productVersion.setName("prod_version_name");
+        productVersion.setDescription("prod_version_description");
+        productVersion.setAvailable(true);
+        productVersion.setProductType(ProductType.MENU_RESTAURANT);
+        productVersion.setCreatedAt(LocalDateTime.now());
+        productVersion.setPrice(Double.valueOf(0));
+        productVersion.setQuantityAvailable(Integer.valueOf(90));
+        productVersion.setOptionCategories( Arrays.asList(Mockito.mock(OptionCategory.class), Mockito.mock(OptionCategory.class)) );
+
+        ParentProduct expectedParentProduct = new ParentProduct();
+        expectedParentProduct.setProductId("23523352");
+        expectedParentProduct.setProductName("product_name");
+        expectedParentProduct.setProductDescription("prod_description");
+        expectedParentProduct.setCreatedAt(LocalDateTime.now());
+        expectedParentProduct.setProductVersions(Arrays.asList(productVersion));
+
+        when(parentProductMapper.mapSaveRequest(any(ParentProductSaveRequest.class))).thenReturn(expectedParentProduct);
+
+        //When
+        productService.save(ppSaveRequest);
+
+        //Then
+        ArgumentCaptor<ParentProduct> parProdArgumentCaptor = ArgumentCaptor.forClass(ParentProduct.class);
+        verify(parentProductRepository).insert(parProdArgumentCaptor.capture());
+
+        ParentProduct capturedParentProduct = parProdArgumentCaptor.getValue();
+
+        assertThat(capturedParentProduct).isEqualTo(expectedParentProduct);
     }
 }
